@@ -2,9 +2,6 @@
 
 AI microservice powering resume parsing, speech transcription, and video analysis for PrepPal's adaptive interview platform.
 
-## 🔗 API Endpoint
-`https://aaaaaaaannnnnnnnnyyyyyyyyyyy-interview.hf.space`
-
 ## Architecture Overview
 
 This service operates as a stateless microservice, receiving multimodal data from the Next.js frontend, processing it through specialized ML pipelines, and returning structured analysis.
@@ -73,47 +70,6 @@ Extracts frames from video, applies computer vision models to detect:
 - Stateless design: No session management, all data ephemeral
 - File lifecycle: Upload → Process → Delete (prevents storage bloat)
 - CORS: Wildcard allowed for hackathon (would restrict in production)
-
-## API Specifications
-
-### POST /api/analyze/resume
-**Input:** `multipart/form-data` with file field  
-**Processing:** PDF extraction OR OCR → text cleaning  
-**Output:**
-```json
-{
-  "success": true,
-  "extractedText": "string",
-  "wordCount": 450
-}
-```
-
-### POST /api/analyze/audio  
-**Input:** Audio file (WAV/MP3/WebM)  
-**Processing:** Whisper transcription  
-**Output:**
-```json
-{
-  "success": true,
-  "transcript": "string",
-  "language": "en"
-}
-```
-
-### POST /api/analyze/video
-**Input:** Video file (MP4/WebM)  
-**Processing:** Frame sampling → CV detection → scoring  
-**Output:**
-```json
-{
-  "success": true,
-  "faceVisibility": 85.5,
-  "postureScore": 78.2,
-  "gazeScore": 82.0,
-  "engagementScore": 81.9,
-  "totalFrames": 1200
-}
-```
 
 ## Performance Characteristics
 
